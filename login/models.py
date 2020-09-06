@@ -4,7 +4,7 @@ from django.contrib.auth.models import (
 	BaseUserManager
 	)
 
-import django.utils.timezone
+
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -20,7 +20,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
 	username = models.CharField(max_length=255, primary_key=True)
 	administratorStatus = models.BooleanField(default=False)
-	timeCreated = models.DateTimeField(default=timezone.now)
+	timeCreated = models.DateTimeField(auto_now_add=True)
 
 	objects = UserManager()
 
