@@ -1,3 +1,32 @@
-p {
-	color: red;
+.login-form{
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	border-width: 1px;
+	border-color: black;
+	border-radius: 1px;
+	border-style:solid;
+	margin-right: 350px;
+	margin-left: 350px;
+	margin-top: 150px;
+	border-radius: 6px;
+}
+
+.user-input {
+	padding: 8px;
+
+}
+
+.p-as-button {
+	padding: 8px;
+	border-color: black;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 6px;
+}
+
+body {
+	text-align: center;
+	padding:20px;
 }
