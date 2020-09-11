@@ -13,3 +13,7 @@ class agendaItem(models.Model):
 	agendaHeader = models.CharField(max_length=255)
 	agendaMainText = models.CharField(max_length=255)
 
+class comment(models.Model):
+	author = models.ForeignKey(User)
+	underAgendaItem = models.ForeignKey(agendaItem)
+	text = models.CharField(max_length=255)
