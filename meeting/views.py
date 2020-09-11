@@ -68,12 +68,16 @@ def meeting_view(request):
 
 	current_user = loginModel.User.objects.get(username=request.user.username)
 
+	agenda_items_for_current_meeting = []
+	for item in meetingModel.agendaItem.objects.all():
+		if item.underMeeting == current_meeting_object:
+			agenda_items_for_current_meeting.append(item)
 
-
-
+	print(agenda_items_for_current_meeting)
 	context = {
 	'meeting_object' : current_meeting_object,
-	'administratorStatus' : False
+	'administratorStatus' : False,
+	'agenda_items_for_current_meeting': agenda_items_for_current_meeting
 	}
 
 	if current_user.administratorStatus:
@@ -86,7 +90,6 @@ def create_new_agenda_item(request):
 	current_meeting_id = request.session['MeetingInFocus']
 	current_meeting_object = meetingModel.meeting.objects.get(id=current_meeting_id)
 	if request.method == "POST":
-		print(request.POST)
 		agenda_item_header = request.POST['agenda_header']
 		agenda_item_background = request.POST['agenda_background']
 		meetingModel.agendaItem.objects.create(underMeeting=current_meeting_object,

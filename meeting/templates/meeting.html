@@ -9,6 +9,12 @@
 </head>
 <body>
 	{{ meeting_object.meetingHeader }}<br><br>
+	{% for item in agenda_items_for_current_meeting %}
+		<div>
+			<h4>{{ item.agendaHeader }}</h4>
+			<h6>{{ item.agendaMainText }}</h6>
+		</div>
+	{% endfor %}
 	{% if administratorStatus %}
 	<form method="POST" id="add_agenda_item">
 		{% csrf_token %}
