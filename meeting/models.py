@@ -14,6 +14,6 @@ class agendaItem(models.Model):
 	agendaMainText = models.CharField(max_length=255)
 
 class comment(models.Model):
-	author = models.ForeignKey(User)
-	underAgendaItem = models.ForeignKey(agendaItem)
+	author = models.ForeignKey(User, on_delete=models.CASCADE)
+	underAgendaItem = models.ForeignKey(agendaItem, on_delete=models.CASCADE)
 	text = models.CharField(max_length=255)
