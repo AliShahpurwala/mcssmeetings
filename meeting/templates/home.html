@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+</head>
+<body>
+	<h1>Welcome to Home!</h1>
+	<form method="POST">
+		{% csrf_token %}
+		{% if administratorStatus %}
+			<button type="submit" name="create_new_meeting" class="p-as-button">Create New Meeting</button>
+		{% else %}
+			<button disabled type="submit" name="create_new_meeting" class="p-as-button">Create New Meeting</button>
+		{% endif %}
+	</form>
+
+	{% for meeting in meetings_list %}
+		<div>
+
+			<h4>{{ meeting.meetingHeader }}</h4>
+			<p>{{ meeting.startTime }}</p>
+			<p>{{ meeting.endTime }}</p>
+			<form method="POST">
+				{% csrf_token %}
+				<button type="submit" name="{{ meeting.id }}">Go To Meeting</button>
+			</form>
+		</div>
+	{% endfor %}
+</body>
+</html>

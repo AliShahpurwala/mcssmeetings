@@ -26,6 +26,13 @@
 	border-radius: 6px;
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 body {
 	text-align: center;
 	padding:20px;

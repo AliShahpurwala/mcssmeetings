@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>New Meeting</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	{% load static %}
+	<script type="text/javascript" src="{% static 'meeting/js/new_meeting.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+</head>
+<body>
+	<form method="POST" name="create_new_meeting_form">
+		{% csrf_token %}
+		<input type="text" name="meeting_header" placeholder="Meeting Title" id="meeting_header">
+		<input type="datetime-local" name="startTime" id="start_time">
+		<input type="datetime-local" name="endTime" id="end_time">
+		<p id="create_new_meeting_submit_button" name="create_new_meeting" class="p-as-button">Create New Meeting</p>
+	</form>
+</body>
+</html>

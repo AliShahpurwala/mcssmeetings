@@ -16,7 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from login import views as loginViews
+from meeting import views as meetingViews
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', loginViews.login_view, name="login_view")
+    path('login/', loginViews.login_view, name="login_view"),
+    path('home/', meetingViews.home_view, name="home_view"),
+    path('createMeeting/', meetingViews.create_new_meeting_view, name="create_new_meeting_view"),
+    path('meeting/', meetingViews.meeting_view, name="meeting_view"),
+    path('create_new_agenda_item/', meetingViews.create_new_agenda_item)
 ]
