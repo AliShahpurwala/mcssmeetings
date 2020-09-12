@@ -73,7 +73,7 @@ def meeting_view(request):
 		if item.underMeeting == current_meeting_object:
 			agenda_items_for_current_meeting.append(item)
 
-	print(agenda_items_for_current_meeting)
+	
 	context = {
 	'meeting_object' : current_meeting_object,
 	'administratorStatus' : False,
@@ -96,4 +96,13 @@ def create_new_agenda_item(request):
 			agendaHeader=agenda_item_header,
 		 	agendaMainText=agenda_item_background)
 
+	return HttpResponse()
+
+def create_new_comment_item(request):
+	if request.method == "POST":
+		current_user = loginModel.User.objects.get(username=request.user.username)
+		current_agenda_item = meetingModel.agendaItem.objects.get(id=request.POST['agenda_id'])
+		meetingModel.comment.objects.create(author=current_user, 
+			underAgendaItem=current_agenda_item,
+			text=request.POST['comment_text'])
 	return HttpResponse()

@@ -23,5 +23,6 @@ urlpatterns = [
     path('home/', meetingViews.home_view, name="home_view"),
     path('createMeeting/', meetingViews.create_new_meeting_view, name="create_new_meeting_view"),
     path('meeting/', meetingViews.meeting_view, name="meeting_view"),
-    path('create_new_agenda_item/', meetingViews.create_new_agenda_item)
+    path('create_new_agenda_item/', meetingViews.create_new_agenda_item),
+    path('create_new_comment_item/', meetingViews.create_new_comment_item)
 ]

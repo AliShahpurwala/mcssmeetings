@@ -13,9 +13,9 @@
 		<div>
 			<h4>{{ item.agendaHeader }}</h4>
 			<h6>{{ item.agendaMainText }}</h6>
-			<form method="POST" id="comment_for_{{item.id}}">
+			<form method="POST" name="new_comment_{{ item.id }}">
 				{% csrf_token %}
-				<input type="text" name="comment_text">
+				<input type="text" name="comment_text" id="comment_for_item_{{ item.id }}_text">
 				<button type="submit" name="create_new_comment">Add Comment</button>
 			</form>
 		</div>

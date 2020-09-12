@@ -23,4 +23,26 @@ $(document).ready(function(){
 
 		});
 	});
+
+	$('form[name^="new_comment_"]').on('submit', function(e){
+		e.preventDefault();
+		var form_name = $(this).attr('name');
+		var agenda_id = form_name.slice(12);
+		var comment_text = $("#comment_for_item_" + agenda_id + "_text").val();
+
+		$.ajax({
+			type: 'POST',
+			url: '/create_new_comment_item/',
+			data: {
+				'agenda_id': agenda_id,
+				'comment_text': comment_text,
+				'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()	
+			},
+			success:function(){
+				location.reload();
+			}
+		});
+
+		
+	});
 });
