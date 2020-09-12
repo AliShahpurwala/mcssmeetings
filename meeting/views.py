@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from login import models as loginModel
 from meeting import models as meetingModel
 from datetime import datetime
+import copy
 # Create your views here.
 def home_view(request):
 	if request.user.is_authenticated:
@@ -69,15 +70,31 @@ def meeting_view(request):
 	current_user = loginModel.User.objects.get(username=request.user.username)
 
 	agenda_items_for_current_meeting = []
+	agenda_items_with_relevant_comments =[]
+
 	for item in meetingModel.agendaItem.objects.all():
 		if item.underMeeting == current_meeting_object:
 			agenda_items_for_current_meeting.append(item)
 
-	
+	temporary_holder_dict = {}
+	copy_of_holder = {}
+
+	for item in agenda_items_for_current_meeting:
+		temporary_holder_dict[item] = []
+		for comment in meetingModel.comment.objects.all():
+			if comment.underAgendaItem == item:
+				temporary_holder_dict[item].append(comment)
+		copy_of_holder = copy.deepcopy(temporary_holder_dict)
+		agenda_items_with_relevant_comments.append(copy_of_holder)
+		temporary_holder_dict = {}
+
+	print(agenda_items_with_relevant_comments)
+
 	context = {
 	'meeting_object' : current_meeting_object,
 	'administratorStatus' : False,
-	'agenda_items_for_current_meeting': agenda_items_for_current_meeting
+	'agenda_items_for_current_meeting': agenda_items_for_current_meeting,
+	'agenda_items_with_relevant_comments': agenda_items_with_relevant_comments
 	}
 
 	if current_user.administratorStatus:

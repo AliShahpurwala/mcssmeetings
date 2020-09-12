@@ -13,6 +13,13 @@ class agendaItem(models.Model):
 	agendaHeader = models.CharField(max_length=255)
 	agendaMainText = models.CharField(max_length=255)
 
+	def compile_relevant_comments(self):
+		compiled_comments = []
+		for com in comment.objects.all():
+			if com.underAgendaItem == self:
+				compiled_comments.append(com)
+		return compiled_comments
+
 class comment(models.Model):
 	author = models.ForeignKey(User, on_delete=models.CASCADE)
 	underAgendaItem = models.ForeignKey(agendaItem, on_delete=models.CASCADE)
