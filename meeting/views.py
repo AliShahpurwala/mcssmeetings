@@ -64,43 +64,48 @@ def create_new_meeting_view(request):
 	
 
 def meeting_view(request):
-	current_meeting_id = request.session['MeetingInFocus']
-	current_meeting_object = meetingModel.meeting.objects.get(id=current_meeting_id)
+	if request.user.is_authenticated:
 
-	current_user = loginModel.User.objects.get(username=request.user.username)
+		current_meeting_id = request.session['MeetingInFocus']
+		current_meeting_object = meetingModel.meeting.objects.get(id=current_meeting_id)
 
-	agenda_items_for_current_meeting = []
-	agenda_items_with_relevant_comments =[]
+		current_user = loginModel.User.objects.get(username=request.user.username)
 
-	for item in meetingModel.agendaItem.objects.all():
-		if item.underMeeting == current_meeting_object:
-			agenda_items_for_current_meeting.append(item)
+		agenda_items_for_current_meeting = []
+		agenda_items_with_relevant_comments =[]
 
-	temporary_holder_dict = {}
-	copy_of_holder = {}
+		for item in meetingModel.agendaItem.objects.all():
+			if item.underMeeting == current_meeting_object:
+				agenda_items_for_current_meeting.append(item)
 
-	for item in agenda_items_for_current_meeting:
-		temporary_holder_dict[item] = []
-		for comment in meetingModel.comment.objects.all():
-			if comment.underAgendaItem == item:
-				temporary_holder_dict[item].append(comment)
-		copy_of_holder = copy.deepcopy(temporary_holder_dict)
-		agenda_items_with_relevant_comments.append(copy_of_holder)
 		temporary_holder_dict = {}
+		copy_of_holder = {}
 
-	print(agenda_items_with_relevant_comments)
+		for item in agenda_items_for_current_meeting:
+			temporary_holder_dict[item] = []
+			for comment in meetingModel.comment.objects.all():
+				if comment.underAgendaItem == item:
+					temporary_holder_dict[item].append(comment)
+			copy_of_holder = copy.deepcopy(temporary_holder_dict)
+			agenda_items_with_relevant_comments.append(copy_of_holder)
+			temporary_holder_dict = {}
 
-	context = {
-	'meeting_object' : current_meeting_object,
-	'administratorStatus' : False,
-	'agenda_items_for_current_meeting': agenda_items_for_current_meeting,
-	'agenda_items_with_relevant_comments': agenda_items_with_relevant_comments
-	}
+		print(agenda_items_with_relevant_comments)
 
-	if current_user.administratorStatus:
-		context['administratorStatus'] = True
+		context = {
+		'meeting_object' : current_meeting_object,
+		'administratorStatus' : False,
+		'agenda_items_for_current_meeting': agenda_items_for_current_meeting,
+		'agenda_items_with_relevant_comments': agenda_items_with_relevant_comments
+		}
 
-	return render(request, 'meeting.html', context)
+		if current_user.administratorStatus:
+			context['administratorStatus'] = True
+
+		return render(request, 'meeting.html', context)
+	else:
+		return redirect('login_view')
+	
 
 
 def create_new_agenda_item(request):

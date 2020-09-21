@@ -14,3 +14,7 @@ def login_view(request):
 			request.session['failed'] = True
 			return redirect('login_view')
 	return render(request, 'login.html')
+
+def logout_view(request):
+	logout(request)
+	return redirect('login_view')
