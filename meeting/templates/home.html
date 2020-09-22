@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-</head>
-<body>
-	<nav class="navbar navbar-light bg-light">
-  		<a class="navbar-brand" href="{% url 'home_view' %}">
-    		<img src="{% static 'login/cssLogo.png' %}" width="60" height="60" class="d-inline-block align-top" alt="">
-  		</a>
-  		<a href="{% url 'logout_view' %}"><svg width="2.25em" height="2.25em" viewBox="0 0 16 16" class="bi bi-door-open-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-</svg></a>
-	</nav>
-	
-	<h1>Welcome to Home!</h1>
+	<head>
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	</head>
+	<body>
+		<nav class="navbar navbar-light bg-light">
+	  		<a class="navbar-brand" href="{% url 'home_view' %}">
+	    		<img src="{% static 'login/cssLogo.png' %}" width="60" height="60" class="d-inline-block align-top" alt="">
+	  		</a>
+	  		<a href="{% url 'logout_view' %}"><svg width="2.25em" height="2.25em" viewBox="0 0 16 16" class="bi bi-door-open-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+	</svg></a>
+		</nav>
+		
+		<h1>Welcome to Home!</h1>
 
-	<br><br>
+		<br><br>
 
 
-	<div class="rows">
-		{% for meeting in meetings_list %}
-			<div class="column">
-				<div class="card" style="width: 18rem;">
-					<div class="card-body">
-						<h4 class="card-title">{{ meeting.meetingHeader }}</h4>
-						<p class="card-subtitle mb-2 text-muted">{{ meeting.startTime }}</p>
-						<p class="card-subtitle mb-2 text-muted">{{ meeting.endTime }}</p>
-						<form method="POST">
-							{% csrf_token %}
-							<button class="btn btn-primary" type="submit" name="{{ meeting.id }}">Go To Meeting</button>
-						</form>
+		<div class="rows">
+			{% for meeting in meetings_list %}
+				<div class="column">
+					<div class="card" style="width: 18rem;">
+						<div class="card-body">
+							<h4 class="card-title">{{ meeting.meetingHeader }}</h4>
+							<p class="card-subtitle mb-2 text-muted">{{ meeting.startTime }}</p>
+							<p class="card-subtitle mb-2 text-muted">{{ meeting.endTime }}</p>
+							<form method="POST">
+								{% csrf_token %}
+								<button class="btn btn-primary" type="submit" name="{{ meeting.id }}">Go To Meeting</button>
+							</form>
+						</div>
 					</div>
+					<br>
 				</div>
-				<br>
-			</div>
-		{% endfor %}
-	</div>
-	<form method="POST">
-		{% csrf_token %}
-		{% if administratorStatus %}
-			<button type="submit" name="create_new_meeting" class="btn btn-primary btn-lg btn-block">Create New Meeting</button>
-		{% else %}
-			<button disabled type="submit" name="create_new_meeting" class="btn btn-primary btn-lg btn-block">Create New Meeting</button>
-		{% endif %}
-	</form>	
-</body>
+			{% endfor %}
+		</div>
+		<form method="POST">
+			{% csrf_token %}
+			{% if administratorStatus %}
+				<button type="submit" name="create_new_meeting" class="btn btn-primary btn-lg btn-block">Create New Meeting</button>
+			{% else %}
+				<button disabled type="submit" name="create_new_meeting" class="btn btn-primary btn-lg btn-block">Create New Meeting</button>
+			{% endif %}
+		</form>	
+	</body>
 </html>
