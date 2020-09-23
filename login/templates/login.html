@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
 </head>
 <body>
-	<form method="POST" class="login-form">
+	<form method="POST" class="login-form" style="text-align: center;">
 		{% csrf_token %}
 		<input type="text" name="username" placeholder="Username" class="user-input"><br><br>
 		<input type="password" name="password" placeholder="Password" class="user-input"><br><br>

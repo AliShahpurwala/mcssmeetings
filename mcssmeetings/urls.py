@@ -25,5 +25,7 @@ urlpatterns = [
     path('meeting/', meetingViews.meeting_view, name="meeting_view"),
     path('create_new_agenda_item/', meetingViews.create_new_agenda_item),
     path('create_new_comment_item/', meetingViews.create_new_comment_item),
-    path('logout/', loginViews.logout_view, name="logout_view")
+    path('logout/', loginViews.logout_view, name="logout_view"),
+    path('account/', meetingViews.account_view, name="account_view"),
+    path('change_password/', meetingViews.change_password_view, name="change_password_view")
 ]

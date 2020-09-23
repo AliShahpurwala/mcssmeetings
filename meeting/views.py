@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login
 from login import models as loginModel
 from meeting import models as meetingModel
 from datetime import datetime
@@ -128,3 +129,25 @@ def create_new_comment_item(request):
 			underAgendaItem=current_agenda_item,
 			text=request.POST['comment_text'])
 	return HttpResponse()
+
+def account_view(request):
+	if request.user.is_authenticated:
+		return render(request, 'account.html')
+	else:
+		return redirect('login_view')
+
+def change_password_view(request):
+	if request.method == 'POST':
+		current_user = loginModel.User.objects.get(username=request.user.username)
+		current_password = request.POST['current_password']
+		user_authentication = authenticate(request, username=current_user.username, password=current_password)
+		if user_authentication is not None:
+			if request.POST['new_password_1'] == request.POST['new_password_2']:
+				current_user.set_password(request.POST['new_password_1'])
+				current_user.save()
+				login(request, current_user)
+				return HttpResponse()
+			else:
+				return HttpResponse()
+		else:
+			return HttpResponse()

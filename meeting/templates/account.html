@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+	<script type="text/javascript" src="{% static 'meeting/js/account.js' %}"></script>
+</head>
+<body>
+		<nav class="navbar navbar-light bg-light">
+	  		<a class="navbar-brand" href="{% url 'home_view' %}">
+	    		<img src="{% static 'login/cssLogo.png' %}" width="60" height="60" class="d-inline-block align-top" alt="">
+	  		</a>
+	  		<div>
+	  		<a href="{% url 'account_view' %}" class="ml-auto">
+	  		<svg width="2.25em" height="2.25em" viewBox="0 0 16 16" class="bi bi-person-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+  <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+</svg></a>
+			
+	  		<a href="{% url 'logout_view' %}"><svg width="2.25em" height="2.25em" viewBox="0 0 16 16" class="bi bi-door-open-fill mr-auto" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+			  <path fill-rule="evenodd" d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2v13h1V2.5a.5.5 0 0 0-.5-.5H11zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+			</svg></a>
+			</div>
+		</nav>
+		<br>
+	<h4>Account</h4>
+
+	<br>
+
+	<form method="POST" id="change_password_form">
+		{% csrf_token %}
+		<div class="form-group">
+			<input type="password" class="form-control" name="current_password" placeholder="Current Password" id="current_password">
+		</div>		
+		<div class="form-group">
+			<input type="password" class="form-control" name="new_password_1" id="new_password_1" placeholder="New Password">
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control" name="new_password_2" id="new_password_2" placeholder="New Password Again">
+		</div>
+		<button class="btn btn-primary" type="submit" name="change_password">Change Password</button>
+	</form>
+
+</body>
+</html>
