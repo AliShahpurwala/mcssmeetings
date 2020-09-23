@@ -28,6 +28,7 @@
 		</nav>
 
 	<br><h1 style="text-align: center;">{{ meeting_object.meetingHeader }}</h1><br>
+	
 		{% for item in agenda_items_for_current_meeting %}
 			<div class="card" style="width: 25rem;">
 				<div class="card-body">
@@ -44,9 +45,9 @@
 						<button type="submit" name="create_new_comment" class="btn btn-primary">Add Comment</button>
 					</form>
 				</div>
-			</div>			
+			</div>
+			<br>			
 		{% endfor %}
-
 
 	<hr/>
 	{% if administratorStatus %}
