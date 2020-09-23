@@ -2,15 +2,18 @@
 <html>
 <head>
 	<title>Login</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	{% load static %}
 	<link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
 </head>
 <body>
 	<form method="POST" class="login-form" style="text-align: center;">
+		<p><img src="{% static 'login/cssLogo.png' %}" width="200px" height="200px"></p>
+		<br>
 		{% csrf_token %}
 		<input type="text" name="username" placeholder="Username" class="user-input"><br><br>
 		<input type="password" name="password" placeholder="Password" class="user-input"><br><br>
-		<button type="submit">Submit</button>
+		<button type="submit" class="btn btn-primary">Login</button>
 	</form>
 </body>
 </html>
