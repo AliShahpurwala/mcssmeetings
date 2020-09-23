@@ -12,7 +12,7 @@
 		<nav class="navbar navbar-light bg-light">
 	  		<a class="navbar-brand" href="{% url 'home_view' %}">
 	    		<img src="{% static 'login/cssLogo.png' %}" width="60" height="60" class="d-inline-block align-top" alt="">
-	  			}
+	  			
 	  		</a>
 	  		<div>
 	  		<a href="{% url 'account_view' %}" class="ml-auto">
@@ -26,22 +26,29 @@
 			</svg></a>
 			</div>
 		</nav>
-	{{ meeting_object.meetingHeader }}<br><br>
-	{% for item in agenda_items_for_current_meeting %}
-		
-		<h4>{{ item.agendaHeader }}</h4>
-		<h6>{{ item.agendaMainText }}</h6>
-		{% for comment in item.compile_relevant_comments %}
-			<p>{{comment.author}} : {{ comment.text }}</p>
-		{% endfor %}
-		<form method="POST" name="new_comment_{{ item.id }}">
-			{% csrf_token %}
-			<input type="text" name="comment_text" id="comment_for_item_{{ item.id }}_text">
-			<button type="submit" name="create_new_comment">Add Comment</button>
-		</form>
 
-	{% endfor %}
-	<br>
+	<br><h1 style="text-align: center;">{{ meeting_object.meetingHeader }}</h1><br>
+		{% for item in agenda_items_for_current_meeting %}
+			<div class="card" style="width: 25rem;">
+				<div class="card-body">
+					<h3 class="card-title">{{ item.agendaHeader }}</h4>
+					<h6 class="card-text">{{ item.agendaMainText }}</h6>
+					{% for comment in item.compile_relevant_comments %}
+						<p>{{comment.author}} : {{ comment.text }}</p>
+					{% endfor %}
+					<hr/>
+					<form method="POST" name="new_comment_{{ item.id }}">
+						{% csrf_token %}
+						<textarea name="comment_text" id="comment_for_item_{{ item.id }}_text" rows="4" cols="46"></textarea>
+									
+						<button type="submit" name="create_new_comment" class="btn btn-primary">Add Comment</button>
+					</form>
+				</div>
+			</div>			
+		{% endfor %}
+
+
+	<hr/>
 	{% if administratorStatus %}
 	<form method="POST" id="add_agenda_item">
 		{% csrf_token %}
@@ -54,7 +61,7 @@
 		<button class="btn btn-primary" type="submit" name="create_new_agenda_item">Add Agenda Item</button>
 	</form>
 	{% else %}
-	<form method="POST" id="add_agenda_item">
+	<form method="POST" id="add_agenda_item" class="border border-primary">
 		{% csrf_token %}
 		<div class="form-group">
 			<input type="text" class="form-control" name="agenda_header" id="agenda_header" placeholder="Agenda Header">
