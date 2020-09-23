@@ -91,7 +91,7 @@ def meeting_view(request):
 			agenda_items_with_relevant_comments.append(copy_of_holder)
 			temporary_holder_dict = {}
 
-		print(agenda_items_with_relevant_comments)
+		
 
 		context = {
 		'meeting_object' : current_meeting_object,
