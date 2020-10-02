@@ -5,6 +5,7 @@ from login import models as loginModel
 from meeting import models as meetingModel
 from datetime import datetime
 import copy
+import os
 # Create your views here.
 def home_view(request):
 	if request.user.is_authenticated:
