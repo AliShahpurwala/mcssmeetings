@@ -19,6 +19,7 @@ from login import views as loginViews
 from meeting import views as meetingViews
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', loginViews.login_view),
     path('login/', loginViews.login_view, name="login_view"),
     path('home/', meetingViews.home_view, name="home_view"),
     path('createMeeting/', meetingViews.create_new_meeting_view, name="create_new_meeting_view"),
