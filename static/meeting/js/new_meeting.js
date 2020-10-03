@@ -30,6 +30,7 @@ $(document).ready(function(){
 			);
 		if (start_time > end_time){
 			alert("Start time can not be after the End time.");
+			return 0;
 		}
 		document.create_new_meeting_form.submit()
 

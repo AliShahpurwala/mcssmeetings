@@ -18,3 +18,6 @@ def login_view(request):
 def logout_view(request):
 	logout(request)
 	return redirect('login_view')
+
+def error_404_view(request, exception):
+	return render(request, 'error_404.html')
