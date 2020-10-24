@@ -5,3 +5,6 @@ Currently, you'd need to be a user to access the website as the website does con
 
 ### Home view
 ![Home View](./homeView.png)
+
+### Meeting View
+![Meeting View](./meetingView.png)
