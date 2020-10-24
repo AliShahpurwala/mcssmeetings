@@ -12,4 +12,6 @@ Currently, Users can only be created through the console by the administrator (m
 ![Home View](./homeView.png)
 
 ### Meeting View
+In the meeting, any other members of the society are allowed to leave comments. Currently, I'm working to build in a web socket so that way the comments are refreshed automatically. The way it is built right now, the user must either make a comment or refresh the page to see the new comments that have been posted.
+
 ![Meeting View](./meetingView.png)
