@@ -67,8 +67,10 @@ def create_new_meeting_view(request):
 
 def meeting_view(request):
 	if request.user.is_authenticated:
-
-		current_meeting_id = request.session['MeetingInFocus']
+		if request.session['MeetingInFocus'] == None:
+			return redirect('home_view')
+		else:
+			current_meeting_id = request.session['MeetingInFocus']	
 		current_meeting_object = meetingModel.meeting.objects.get(id=current_meeting_id)
 
 		current_user = loginModel.User.objects.get(username=request.user.username)
