@@ -28,7 +28,7 @@ SECRET_KEY = secret_key_from_file   # 'kq*hihw7_*cx^v+^xuuksy8xec$3273mvbx1t(n+g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
