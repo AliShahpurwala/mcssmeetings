@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import handler404
 from login import views as loginViews
 from meeting import views as meetingViews
 urlpatterns = [
@@ -31,5 +30,3 @@ urlpatterns = [
     path('account/', meetingViews.account_view, name="account_view"),
     path('change_password/', meetingViews.change_password_view, name="change_password_view")
 ]
-
-handler404 = loginViews.error_404_view
