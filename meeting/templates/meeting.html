@@ -28,15 +28,19 @@
 		</nav>
 
 	<br><h1 style="text-align: center;">{{ meeting_object.meetingHeader }}</h1><br>
+	<p id="meeting_id">{{ meeting_object.id }}</p>
 	
 		{% for item in agenda_items_for_current_meeting %}
 			<div class="card" style="width: 25rem;">
 				<div class="card-body">
 					<h3 class="card-title">{{ item.agendaHeader }}</h4>
 					<h6 class="card-text">{{ item.agendaMainText }}</h6>
-					{% for comment in item.compile_relevant_comments %}
-						<p>{{comment.author}} : {{ comment.text }}</p>
-					{% endfor %}
+					<div id="comments_for_agenda_item_{{ item.id }}">
+						<!-- {% for comment in item.compile_relevant_comments %}
+							<p>{{comment.author}} : {{ comment.text }}</p>
+						{% endfor %} -->
+						
+					</div>
 					<hr/>
 					<form method="POST" name="new_comment_{{ item.id }}">
 						{% csrf_token %}

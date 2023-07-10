@@ -20,20 +20,31 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-f = open("secret_key", "r")
+f = open("secret_key.txt", "r")
 secret_key_from_file = f.read()
 
 SECRET_KEY = secret_key_from_file   # 'kq*hihw7_*cx^v+^xuuksy8xec$3273mvbx1t(n+g$o6n&-f49'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+ASGI_APPLICATION = "mcssmeetings.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'login',
     'meeting',
     'django.contrib.admin',

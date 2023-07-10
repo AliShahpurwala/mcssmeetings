@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login
+from django.core import serializers
 from login import models as loginModel
 from meeting import models as meetingModel
 from datetime import datetime
@@ -154,3 +155,15 @@ def change_password_view(request):
 				return HttpResponse()
 		else:
 			return HttpResponse()
+
+def get_agenda_items(request, meetingId):
+	if not request.user.is_authenticated:
+		return redirect("login_view")
+
+	return JsonResponse(serializers.serialize("json", meetingModel.agendaItem.objects.filter(underMeeting=meetingId)), safe=False) 
+
+def get_agenda_item_comments(request, agendaItemId):
+	if not request.user.is_authenticated:
+		return redirect("login_view")
+
+	return JsonResponse(serializers.serialize("json", meetingModel.comment.objects.filter(underAgendaItem=agendaItemId)), safe=False) 
